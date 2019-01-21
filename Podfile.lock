@@ -1,0 +1,20 @@
+PODS:
+  - LBTAComponents (1.0.2)
+  - RevealingSplashView (0.6.0)
+
+DEPENDENCIES:
+  - LBTAComponents
+  - RevealingSplashView
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - LBTAComponents
+    - RevealingSplashView
+
+SPEC CHECKSUMS:
+  LBTAComponents: c4c8863e0ef6715e378300db148b96a09df656f7
+  RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
+
+PODFILE CHECKSUM: 25470b53659f307362c42bed2a560e5013978aff
+
+COCOAPODS: 1.5.3

@@ -1,0 +1,6 @@
+framework module Pods_swifty_protein {
+  umbrella header "Pods-swifty-protein-umbrella.h"
+
+  export *
+  module * { export * }
+}
