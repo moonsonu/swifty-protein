@@ -14,7 +14,10 @@ class ProteinSCN: SCNScene, SCNNodeRendererDelegate {
     var camera: SCNNode!
     var atom: [SCNNode?] = []
     var pdb_file : [String]?
-    init(pdb_file: [String]) {
+    var view: Bool?
+    var radius: CGFloat?
+    
+    init(pdb_file: [String], view: Bool, radius: CGFloat) {
         super.init()
         //initCamera()
         
@@ -27,14 +30,28 @@ class ProteinSCN: SCNScene, SCNNodeRendererDelegate {
             line = line.filter { $0 != ""}
             if line.count > 0 {
             if line[0] == "ATOM" {
-                let sGeometry2 = SCNSphere(radius: 0.6)
+        
+                if view == true {
+                    let sGeometry2 = SCNSphere(radius: radius)
                 let sNode2 = SCNNode(geometry: sGeometry2)
-                sNode2.position = SCNVector3(x: Float(line[6])!, y: Float(line[7])!, z: Float(line[8])!)
-                sGeometry2.firstMaterial?.diffuse.contents = spkColoring(name: String(line[11]))
-                sNode.name = String(line[11])
-                sNode2.name = String(line[11])
-                self.rootNode.addChildNode(sNode2)
-                self.atom.append(sNode2)
+                    sNode2.position = SCNVector3(x: Float(line[6])!, y: Float(line[7])!, z: Float(line[8])!)
+                    sGeometry2.firstMaterial?.diffuse.contents = spkColoring(name: String(line[11]))
+                    sNode.name = String(line[11])
+                    sNode2.name = String(line[11])
+                    self.rootNode.addChildNode(sNode2)
+                    self.atom.append(sNode2)
+                }
+                else if view == false {
+                    let sGeometry2 = SCNBox(width: radius, height: radius, length: radius, chamferRadius: 0.1)
+                    let sNode2 = SCNNode(geometry: sGeometry2)
+                    sNode2.position = SCNVector3(x: Float(line[6])!, y: Float(line[7])!, z: Float(line[8])!)
+                    sGeometry2.firstMaterial?.diffuse.contents = spkColoring(name: String(line[11]))
+                    sNode.name = String(line[11])
+                    sNode2.name = String(line[11])
+                    self.rootNode.addChildNode(sNode2)
+                    self.atom.append(sNode2)
+                }
+                
             }
             else if line[0] == "CONECT"
             {

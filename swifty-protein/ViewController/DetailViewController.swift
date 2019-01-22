@@ -13,26 +13,27 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var ProteinView: SCNView!
     
+    @IBOutlet weak var Stepper: UIStepper!
+    @IBOutlet weak var Segment: UISegmentedControl!
     let activityIndicator = ActivityIndicator.shared
     var name : String?
     var pdb_file : String?
     var http: String = "https://files.rcsb.org/ligands/view/"
     var pdb: String = "_ideal.pdb"
     var atom: [Elements]?
+    var model: Bool = true
+    var radius: CGFloat = 0.5
     let settingLaunch = SlideupInfo()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.animateActivity(title: "Loading...", view: self.view, navigationItem: navigationItem)
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "menlo-Bold", size: 20)!]
-        getproteinInfo(pName: name!)
+        getproteinInfo(pName: name!, view: model, radius: radius)
         ProteinView.allowsCameraControl = true
         ProteinView.autoenablesDefaultLighting = true
-//        ProteinView.layer.borderWidth = 5
-//        ProteinView.layer.borderColor = UIColor.white.cgColor
         ProteinView.layer.cornerRadius = 10
         ProteinView.layer.masksToBounds = true
-        
         sceneSetup()
         
         atom = GetAtomInfo().getAtomInfo()
@@ -48,7 +49,26 @@ class DetailViewController: UIViewController {
         
     }
 
-    func getproteinInfo(pName: String) {
+    @IBAction func ChangeModelView(_ sender: Any) {
+        let index = Segment.selectedSegmentIndex
+        switch (index) {
+        case 0:
+            model = true
+            getproteinInfo(pName: name!, view: model, radius: radius)
+        case 1:
+            model = false
+            getproteinInfo(pName: name!, view: model, radius: radius)
+        default:
+            print("segment error")
+        }
+    }
+    
+    @IBAction func ChangeModelRadius(_ sender: Any) {
+        radius = CGFloat(Stepper.value)
+        getproteinInfo(pName: name!, view: model, radius: radius)
+    }
+    
+    func getproteinInfo(pName: String, view: Bool, radius: CGFloat) {
 
         let url = URL(string: http + pName + pdb)
         let task = URLSession.shared.dataTask(with: url!, completionHandler: {(data, response, error) in
@@ -61,9 +81,7 @@ class DetailViewController: UIViewController {
                 string.enumerateLines { (line, _) in
                     lines.append(line)
                 }
-
-
-                self.ProteinView!.scene = ProteinSCN(pdb_file: lines)
+                    self.ProteinView!.scene = ProteinSCN(pdb_file: lines, view: self.model, radius: self.radius)
                 self.activityIndicator.stopAnimating(navigationItem: self.navigationItem)
                 self.title = self.name
             }

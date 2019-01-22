@@ -49,7 +49,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8t-X0-qSr">
-                                <rect key="frame" x="157.5" y="335.5" width="60" height="60"/>
+                                <rect key="frame" x="163.5" y="335.5" width="48" height="48"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="touchid"/>
                                 <connections>
@@ -168,25 +168,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sMx-f8-7tD">
-                                <rect key="frame" x="16" y="127" width="343" height="472"/>
+                                <rect key="frame" x="16" y="85" width="343" height="453"/>
                                 <color key="backgroundColor" red="0.25326341967183247" green="0.37246952388255117" blue="0.83064896170863034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" id="M9d-PS-d6O"/>
-                                    <constraint firstAttribute="height" constant="472" id="vbU-yH-goA"/>
+                                    <constraint firstAttribute="height" constant="453" id="vbU-yH-goA"/>
                                 </constraints>
                             </sceneKitView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WpY-oO-ygQ">
+                                <rect key="frame" x="224" y="588" width="135" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="135" id="4ZV-G1-Vvs"/>
+                                    <constraint firstAttribute="height" constant="28" id="Upl-N1-xSh"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="CIRCLE"/>
+                                    <segment title="SQUARE"/>
+                                </segments>
+                                <connections>
+                                    <action selector="ChangeModelView:" destination="F8b-Fo-hWz" eventType="valueChanged" id="dv2-hK-PzR"/>
+                                </connections>
+                            </segmentedControl>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" value="0.5" maximumValue="1" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="eE5-pJ-W6Q">
+                                <rect key="frame" x="16" y="587" width="94" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="94" id="1jo-E8-5Qr"/>
+                                    <constraint firstAttribute="height" constant="29" id="D94-W5-bBo"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="ChangeModelRadius:" destination="F8b-Fo-hWz" eventType="valueChanged" id="4Xy-Nr-73Q"/>
+                                </connections>
+                            </stepper>
                         </subviews>
                         <color key="backgroundColor" red="0.69310617446899414" green="0.84165900945663452" blue="0.95017784833908081" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="sMx-f8-7tD" firstAttribute="top" secondItem="xv0-yn-Dnl" secondAttribute="top" constant="63" id="1KG-lu-D6c"/>
-                            <constraint firstItem="xv0-yn-Dnl" firstAttribute="bottom" secondItem="sMx-f8-7tD" secondAttribute="bottom" constant="68" id="b7d-br-U0K"/>
+                            <constraint firstItem="eE5-pJ-W6Q" firstAttribute="leading" secondItem="xv0-yn-Dnl" secondAttribute="leading" constant="16" id="0r9-KV-OnQ"/>
+                            <constraint firstItem="sMx-f8-7tD" firstAttribute="top" secondItem="xv0-yn-Dnl" secondAttribute="top" constant="21" id="1KG-lu-D6c"/>
+                            <constraint firstItem="xv0-yn-Dnl" firstAttribute="trailing" secondItem="WpY-oO-ygQ" secondAttribute="trailing" constant="16" id="1cS-5X-Ajn"/>
+                            <constraint firstItem="WpY-oO-ygQ" firstAttribute="top" secondItem="sMx-f8-7tD" secondAttribute="bottom" constant="50" id="4pc-Sv-wZC"/>
+                            <constraint firstItem="xv0-yn-Dnl" firstAttribute="bottom" secondItem="sMx-f8-7tD" secondAttribute="bottom" constant="129" id="b7d-br-U0K"/>
                             <constraint firstItem="xv0-yn-Dnl" firstAttribute="trailing" secondItem="sMx-f8-7tD" secondAttribute="trailing" constant="16" id="c3h-gA-Qmy"/>
+                            <constraint firstItem="WpY-oO-ygQ" firstAttribute="leading" secondItem="eE5-pJ-W6Q" secondAttribute="trailing" constant="114" id="c4C-dk-Dpq"/>
                             <constraint firstItem="sMx-f8-7tD" firstAttribute="leading" secondItem="xv0-yn-Dnl" secondAttribute="leading" constant="16" id="hRP-VG-M3o"/>
+                            <constraint firstItem="eE5-pJ-W6Q" firstAttribute="top" secondItem="sMx-f8-7tD" secondAttribute="bottom" constant="49" id="tev-bv-04r"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xv0-yn-Dnl"/>
                     </view>
                     <connections>
                         <outlet property="ProteinView" destination="sMx-f8-7tD" id="EYr-iK-6md"/>
+                        <outlet property="Segment" destination="WpY-oO-ygQ" id="zfk-Q6-NZB"/>
+                        <outlet property="Stepper" destination="eE5-pJ-W6Q" id="fyE-p1-pZp"/>
                         <segue destination="2eb-S2-cGH" kind="presentation" identifier="warning" id="9Nl-n5-Yuc"/>
                     </connections>
                 </viewController>
@@ -212,7 +243,7 @@
                                             <constraint firstAttribute="width" constant="251" id="Q9b-YP-vhE"/>
                                             <constraint firstAttribute="height" constant="30" id="zYB-AF-ftw"/>
                                         </constraints>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" title="OK">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -279,8 +310,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="480" height="531"/>
-        <image name="touchid" width="60" height="60"/>
+        <image name="background" width="360" height="398.25"/>
+        <image name="touchid" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BzE-bt-0zi"/>
