@@ -1,5 +1,7 @@
 # swifty-protein
- This project is to make an application that load the ligand through the [RCSB](https://www.rcsb.org/) and create 3D animated scenes using **SceneKit** frame Work.
+ This project is to make an application that load the ligand through the [RCSB](https://www.rcsb.org/)
+ and create 3D animated scenes using **SceneKit** frame Work.
+ 
 ![](swiftproteinex.gif)
 
 **Mandatory :**
